@@ -25,12 +25,7 @@ class User(db.Model):
 class Person(db.Model):
     __tablename__ = 'Person'
     id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.Integer)
     name = db.Column(db.String(250), nullable=False)
-    gender = db.Column(db.String(250))
-    eye_color = db.Column(db.String(250))
-    hair_color = db.Column(db.String(250))
-    height = db.Column(db.Integer)
 
     def __repr__(person):
         return '<Person %r>' % self.name
@@ -38,23 +33,14 @@ class Person(db.Model):
     def serialize(person):
         return {
             "id": person.id,
-            "uid": person.uid,
             "name": person.name,
-            "gender": person.gender,
-            "eye_color": person.eye_color,
-            "hair_color": person.hair_color,
-            "height": person.height
         }
 
 
 class Planet(db.Model):
     __tablename__ = 'Planet'
     id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.Integer)
     name = db.Column(db.String(250), nullable=False)
-    climate = db.Column(db.String(250))
-    population = db.Column(db.Integer)
-    terrain = db.Column(db.String(250))
 
     def __repr__(planet):
         return '<Planet>'
@@ -62,11 +48,8 @@ class Planet(db.Model):
     def serialize(planet):
         return {
             "id": planet.id,
-            "uid": planet.uid,
             "name": planet.name,
             "climate": planet.climate,
-            "population": planet.population,
-            "terrain": planet.terrain,
         }
 
 

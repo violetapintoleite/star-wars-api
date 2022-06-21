@@ -39,6 +39,28 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
+@app.route('/person', methods=['GET'])
+def get_people_list():
+    people = Person
+    return jsonify(people.serialize()), 200
+
+@app.route('/person/<int:person_id>', methods=['GET'])
+def get_single_person(person_id):
+    person = Person.query.get(person_id)
+    return jsonify(person.serialize()), 200
+
+@app.route('/planet', methods=['GET'])
+def get_planets_list():
+    planets = Planet
+    return jsonify(planets.serialize()), 200
+
+@app.route('/planet/<int:planet_id>', methods=['GET'])
+def get_single_planet(planet_id):
+    planet = Planet.query.get(planet_id)
+    return jsonify(planet.serialize()), 200
+
+   
+
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
