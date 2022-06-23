@@ -41,8 +41,9 @@ def handle_hello():
 
 @app.route('/person', methods=['GET'])
 def get_people_list():
-    people = Person
-    return jsonify(people.serialize()), 200
+    person = Person
+
+    return jsonify(person.serialize(person)), 200
 
 @app.route('/person/<int:person_id>', methods=['GET'])
 def get_single_person(person_id):
@@ -52,7 +53,7 @@ def get_single_person(person_id):
 @app.route('/planet', methods=['GET'])
 def get_planets_list():
     planets = Planet
-    return jsonify(planets.serialize()), 200
+    return jsonify(planets.serialize(planets)), 200
 
 @app.route('/planet/<int:planet_id>', methods=['GET'])
 def get_single_planet(planet_id):

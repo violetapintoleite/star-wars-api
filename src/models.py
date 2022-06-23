@@ -49,7 +49,6 @@ class Planet(db.Model):
         return {
             "id": planet.id,
             "name": planet.name,
-            "climate": planet.climate,
         }
 
 
