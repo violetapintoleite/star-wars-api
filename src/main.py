@@ -30,34 +30,57 @@ def handle_invalid_usage(error):
 def sitemap():
     return generate_sitemap(app)
 
-@app.route('/user', methods=['GET'])
-def handle_hello():
+#@app.route('/user', methods=['GET'])
+#def handle_hello():
 
-    response_body = {
-        "msg": "Hello, this is your GET /user response "
-    }
+#    response_body = {
+#        "msg": "Hello, this is your GET /user response "
+#    }
 
-    return jsonify(response_body), 200
+#    return jsonify(response_body), 200
+
+@app.route('/users', methods=['GET'])
+def get_all_users():
+    
+    users = User.get_all_users()
+    serialized_users = []
+    for user in users:
+        serialized_users.append(user.serialize())
+
+    return(jsonify(serialized_users))
+
+@app.route('/users/<int:id>', methods=['GET'])
+def get_users_by_id(id):
+    
+    user = User.get_users_by_id(id)
+    
+    return(jsonify(user.serialize()))
 
 @app.route('/person', methods=['GET'])
 def get_people_list():
-    person = Person
+    people = Person.get_people_list()
+    serialized_people = []
+    for person in people:
+        serialized_people.append(person.serialize())
 
-    return jsonify(person.serialize(person)), 200
+    return jsonify(serialized_people), 200
 
 @app.route('/person/<int:person_id>', methods=['GET'])
 def get_single_person(person_id):
-    person = Person.query.get(person_id)
+    person = Person.get_single_person(id)
     return jsonify(person.serialize()), 200
 
 @app.route('/planet', methods=['GET'])
 def get_planets_list():
-    planets = Planet
-    return jsonify(planets.serialize(planets)), 200
+    planets = Planet.get_planets_list()
+    serialized_planets = []
+    for planet in planets:
+        serialized_planets.append(planet.serialize())
+    return jsonify(serialized_planets), 200
 
 @app.route('/planet/<int:planet_id>', methods=['GET'])
 def get_single_planet(planet_id):
-    planet = Planet.query.get(planet_id)
+    planet = Planet.get_single_planet(id)
     return jsonify(planet.serialize()), 200
 
    
