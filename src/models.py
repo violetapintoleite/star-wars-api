@@ -103,4 +103,9 @@ class Favourites(db.Model):
             "planet_id": favourites.planet_id,
         }
 
+    @classmethod
+    def get_users_favourites(cls, user_id):
+        user_favourite = cls.query.filter_by(user_id = user_id).one_or_none()
+        return user_favourite
+
    

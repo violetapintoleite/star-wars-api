@@ -83,6 +83,10 @@ def get_single_planet(id):
     planet = Planet.get_single_planet(id)
     return jsonify(planet.serialize()), 200
 
+@app.route('/users/favourites/<int:user_id>', methods=['GET'])
+def get_users_favourites(user_id):
+    favourites = Favourites.get_users_favourites(user_id)
+    return jsonify(favourites.serialize()), 200
    
 
 # this only runs if `$ python src/main.py` is executed
