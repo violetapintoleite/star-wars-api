@@ -83,10 +83,60 @@ def get_single_planet(id):
     planet = Planet.get_single_planet(id)
     return jsonify(planet.serialize()), 200
 
+@app.route('/favourites', methods=['GET'])
+def get_favourites_list():
+    favourites = Favourites.get_favourites_list()
+    serialized_favourites = []
+    for favourite in favourites:
+        serialized_favourites.append(favourite.serialize())
+    return jsonify(serialized_favourites), 200
+
 @app.route('/users/favourites/<int:user_id>', methods=['GET'])
 def get_users_favourites(user_id):
     favourites = Favourites.get_users_favourites(user_id)
     return jsonify(favourites.serialize()), 200
+
+@app.route('/favourites/planet/<int:planet_id>', methods=['POST'])
+def add_planet_to_favourites(planet_id):
+    favourites = Favourites.get_favourites_list()
+    serialized_favourites = []
+    for favourite in favourites:
+        serialized_favourites.append(favourite.serialize())
+    planet_to_add = Planet.get_single_planet(planet_id)
+    serialized_favourites.append(planet_to_add.serialize())
+    return jsonify(serialized_favourites), 200
+
+@app.route('/favourites/planet/<int:planet_id>', methods=['DELETE'])
+def remove_planet(planet_id):
+    favourites = Favourites.get_favourites_list()
+    serialized_favourites = []
+    for favourite in favourites:
+        serialized_favourites.append(favourite.serialize())
+    
+    removed = list(filter(lambda i: i["planet_id"] != planet_id, serialized_favourites))
+        
+    return jsonify(removed), 200
+
+@app.route('/favourites/person/<int:person_id>', methods=['POST'])
+def add_person_to_favourites(person_id):
+    favourites = Favourites.get_favourites_list()
+    serialized_favourites = []
+    for favourite in favourites:
+        serialized_favourites.append(favourite.serialize())
+    person_to_add = Person.get_single_person(person_id)
+    serialized_favourites.append(person_to_add.serialize())
+    return jsonify(serialized_favourites), 200
+
+@app.route('/favourites/person/<int:person_id>', methods=['DELETE'])
+def remove_person(person_id):
+    favourites = Favourites.get_favourites_list()
+    serialized_favourites = []
+    for favourite in favourites:
+        serialized_favourites.append(favourite.serialize())
+    
+    removed = list(filter(lambda i: i["person_id"] != person_id, serialized_favourites))
+        
+    return jsonify(removed), 200
    
 
 # this only runs if `$ python src/main.py` is executed
