@@ -65,8 +65,8 @@ def get_people_list():
 
     return jsonify(serialized_people), 200
 
-@app.route('/person/<int:person_id>', methods=['GET'])
-def get_single_person(person_id):
+@app.route('/person/<int:id>', methods=['GET'])
+def get_single_person(id):
     person = Person.get_single_person(id)
     return jsonify(person.serialize()), 200
 
@@ -78,8 +78,8 @@ def get_planets_list():
         serialized_planets.append(planet.serialize())
     return jsonify(serialized_planets), 200
 
-@app.route('/planet/<int:planet_id>', methods=['GET'])
-def get_single_planet(planet_id):
+@app.route('/planet/<int:id>', methods=['GET'])
+def get_single_planet(id):
     planet = Planet.get_single_planet(id)
     return jsonify(planet.serialize()), 200
 
